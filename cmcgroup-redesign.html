@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CMC Group Taxes — #1 Accounting Firm in Delaware</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#05090f;
+  --ink2:#0b1220;
+  --ink3:#111e33;
+  --gold:#c9a84c;
+  --gold2:#e4c76b;
+  --gold3:#f5e4b0;
+  --glow:rgba(201,168,76,0.35);
+  --glass:rgba(255,255,255,0.04);
+  --glass2:rgba(255,255,255,0.07);
+  --border:rgba(201,168,76,0.2);
+  --border2:rgba(255,255,255,0.08);
+  --txt:rgba(255,255,255,0.88);
+  --muted:rgba(255,255,255,0.45);
+  --dim:rgba(255,255,255,0.22);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--ink);
+  color:var(--txt);
+  overflow-x:hidden;
+  cursor:none;
+}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+
+/* ── PROGRESS BAR ── */
+#progress{
+  position:fixed;top:0;left:0;height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  z-index:9999;width:0%;transition:width 0.1s linear;
+  box-shadow:0 0 12px var(--glow);
+}
+
+/* ── CUSTOM CURSOR ── */
+#cursor{
+  position:fixed;width:10px;height:10px;
+  background:var(--gold);border-radius:50%;
+  pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:transform 0.08s ease,background 0.2s,width 0.2s,height 0.2s;
+  mix-blend-mode:difference;
+}
+#cursor-ring{
+  position:fixed;width:36px;height:36px;
+  border:1px solid rgba(201,168,76,0.5);
+  border-radius:50%;pointer-events:none;z-index:9997;
+  transform:translate(-50%,-50%);
+  transition:transform 0.18s ease,width 0.3s,height 0.3s,border-color 0.3s;
+}
+body:has(a:hover) #cursor-ring,body:has(button:hover) #cursor-ring{
+  width:56px;height:56px;border-color:var(--gold);
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  padding:0 3vw;height:72px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background 0.4s,backdrop-filter 0.4s;
+}
+nav.scrolled{
+  background:rgba(5,9,15,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.logo-wrap{display:flex;align-items:center;gap:14px;text-decoration:none}
+.logo-icon{
+  width:40px;height:40px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-weight:700;font-size:18px;
+  color:var(--ink);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+}
+.logo-text{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#fff;letter-spacing:0.5px}
+.logo-text span{color:var(--gold)}
+.logo-sub{font-size:9px;font-weight:500;color:var(--gold);letter-spacing:0.18em;text-transform:uppercase;display:block;line-height:1;margin-top:1px}
+.nav-links{display:flex;gap:36px;align-items:center}
+.nav-links a{
+  color:var(--muted);text-decoration:none;font-size:13px;
+  font-weight:500;letter-spacing:0.08em;text-transform:uppercase;
+  transition:color 0.2s;position:relative;padding-bottom:4px;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:0;left:0;width:0;height:1px;
+  background:var(--gold);transition:width 0.3s;
+}
+.nav-links a:hover{color:#fff}
+.nav-links a:hover::after{width:100%}
+.nav-btn{
+  background:transparent;border:1px solid var(--border);
+  color:var(--gold);font-family:'Outfit',sans-serif;
+  font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+  padding:10px 24px;cursor:none;text-decoration:none;
+  transition:all 0.3s;position:relative;overflow:hidden;
+}
+.nav-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  transform:scaleX(0);transform-origin:left;transition:transform 0.3s;z-index:-1;
+}
+.nav-btn:hover{color:var(--ink);border-color:var(--gold)}
+.nav-btn:hover::before{transform:scaleX(1)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:none;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:#fff;transition:all 0.3s}
+
+/* ── MOBILE MENU ── */
+.mob{
+  display:none;position:fixed;inset:0;background:var(--ink2);
+  z-index:950;align-items:center;justify-content:center;flex-direction:column;gap:2.5rem;
+}
+.mob.open{display:flex}
+.mob a{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:600;color:#fff;text-decoration:none;transition:color 0.2s}
+.mob a:hover{color:var(--gold)}
+.mob-close{position:absolute;top:24px;right:28px;background:none;border:none;color:#fff;font-size:2rem;cursor:none}
+
+/* ── HERO ── */
+#hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;overflow:hidden;
+}
+#hero-canvas{position:absolute;inset:0;z-index:0}
+.hero-gradient{
+  position:absolute;inset:0;z-index:1;
+  background:
+    radial-gradient(ellipse 60% 70% at 75% 50%,rgba(201,168,76,0.07),transparent),
+    radial-gradient(ellipse 40% 60% at 20% 80%,rgba(17,30,51,0.9),transparent),
+    linear-gradient(160deg,#05090f 0%,#0d1929 55%,#05090f 100%);
+}
+.hero-inner{
+  position:relative;z-index:2;max-width:1280px;
+  margin:0 auto;padding:0 6vw;width:100%;
+  padding-top:72px;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  background:rgba(201,168,76,0.08);
+  border:1px solid rgba(201,168,76,0.25);
+  padding:8px 20px;margin-bottom:2.5rem;
+  animation:fadeUp 0.9s ease both;
+}
+.hero-dot{width:7px;height:7px;background:var(--gold);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 var(--glow)}50%{opacity:0.4;box-shadow:0 0 12px 4px var(--glow)}}
+.hero-eyebrow span{font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold)}
+.hero-headline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.5rem,7.5vw,6.5rem);
+  font-weight:700;line-height:1.0;color:#fff;
+  margin-bottom:1.8rem;
+  animation:fadeUp 0.9s ease 0.12s both;
+}
+.hero-headline .line{overflow:hidden;display:block}
+.hero-headline em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold2) 50%,var(--gold3) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  font-size:1.1rem;color:var(--muted);max-width:560px;line-height:1.85;
+  margin-bottom:3rem;font-weight:300;
+  animation:fadeUp 0.9s ease 0.24s both;
+}
+.hero-sub strong{color:var(--txt);font-weight:500}
+.hero-actions{display:flex;gap:18px;flex-wrap:wrap;animation:fadeUp 0.9s ease 0.36s both}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:var(--ink);font-size:13px;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;padding:16px 36px;
+  border:none;cursor:none;position:relative;overflow:hidden;
+  transition:transform 0.3s,box-shadow 0.3s;
+}
+.btn-gold::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,0.25));
+  opacity:0;transition:opacity 0.3s;
+}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(201,168,76,0.35)}
+.btn-gold:hover::after{opacity:1}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:10px;
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.2);
+  color:#fff;font-size:13px;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;padding:16px 36px;
+  cursor:none;transition:all 0.3s;
+}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.05)}
+.hero-scroll{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;
+  animation:fadeUp 1s ease 0.8s both;
+}
+.hero-scroll span{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--dim)}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s ease infinite}
+@keyframes scrollPulse{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(1);transform-origin:bottom;opacity:0}}
+.hero-stats-bar{
+  margin-top:5rem;padding-top:3rem;
+  border-top:1px solid var(--border2);
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;animation:fadeUp 0.9s ease 0.48s both;
+}
+.hstat{padding:0 2.5rem 0 0;border-right:1px solid var(--border2)}
+.hstat:last-child{border-right:none;padding-left:2.5rem;padding-right:0}
+.hstat:nth-child(2){padding:0 2.5rem}
+.hstat-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:4rem;font-weight:700;
+  background:linear-gradient(135deg,#fff 30%,var(--gold) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;
+}
+.hstat-l{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:6px;font-weight:500}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION GENERIC ── */
+section{position:relative}
+.section-wrap{max-width:1280px;margin:0 auto;padding:0 6vw}
+.s-label{
+  font-size:10.5px;font-weight:700;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:12px;margin-bottom:1.2rem;
+}
+.s-label::before{content:'';width:28px;height:1px;background:var(--gold)}
+.s-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,4.5vw,3.6rem);
+  font-weight:700;color:#fff;line-height:1.15;margin-bottom:1rem;
+}
+.s-title em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.s-body{font-size:15px;color:var(--muted);line-height:1.85;max-width:560px;font-weight:300}
+
+/* ── SERVICES ── */
+#services{padding:120px 0;background:var(--ink)}
+.services-header{text-align:center;margin-bottom:70px}
+.services-header .s-label{justify-content:center}
+.services-header .s-label::before{display:none}
+.services-header .s-body{margin:0 auto;max-width:620px;text-align:center}
+.services-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--border2);border:1px solid var(--border2);
+}
+.svc{
+  background:var(--ink);padding:44px 36px;
+  position:relative;overflow:hidden;
+  transition:background 0.4s;group:true;
+}
+.svc::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(201,168,76,0.06),transparent);
+  opacity:0;transition:opacity 0.4s;
+}
+.svc:hover{background:var(--ink3)}
+.svc:hover::before{opacity:1}
+.svc-shine{
+  position:absolute;top:-100%;left:-100%;
+  width:200%;height:200%;
+  background:linear-gradient(135deg,transparent 40%,rgba(201,168,76,0.04) 50%,transparent 60%);
+  transition:top 0.6s,left 0.6s;pointer-events:none;
+}
+.svc:hover .svc-shine{top:0;left:0}
+.svc-border{
+  position:absolute;bottom:0;left:0;height:2px;width:0;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  transition:width 0.5s ease;
+}
+.svc:hover .svc-border{width:100%}
+.svc-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:4.5rem;font-weight:700;
+  color:rgba(255,255,255,0.03);
+  position:absolute;top:12px;right:24px;line-height:1;
+  transition:color 0.4s;
+}
+.svc:hover .svc-num{color:rgba(201,168,76,0.06)}
+.svc-icon{
+  width:54px;height:54px;margin-bottom:28px;
+  background:rgba(201,168,76,0.07);
+  border:1px solid rgba(201,168,76,0.15);
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.3s;
+}
+.svc:hover .svc-icon{background:rgba(201,168,76,0.15);border-color:var(--gold)}
+.svc-icon svg{width:24px;height:24px;stroke:var(--gold);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:stroke 0.3s}
+.svc-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.45rem;font-weight:600;color:#fff;
+  margin-bottom:14px;line-height:1.2;
+}
+.svc-desc{font-size:13.5px;color:var(--muted);line-height:1.85;margin-bottom:24px;font-weight:300}
+.svc-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:0.15em;
+  text-transform:uppercase;color:var(--gold);text-decoration:none;
+  opacity:0;transform:translateY(8px);transition:all 0.35s;
+}
+.svc:hover .svc-cta{opacity:1;transform:translateY(0)}
+.svc-cta-arrow{transition:transform 0.3s}
+.svc-cta:hover .svc-cta-arrow{transform:translateX(5px)}
+/* International highlight row */
+.svc-wide{
+  grid-column:span 3;background:var(--ink3);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:44px 52px;gap:32px;flex-wrap:wrap;
+  border-top:1px solid var(--border2);position:relative;overflow:hidden;
+}
+.svc-wide::after{
+  content:'INTERNATIONAL';
+  position:absolute;right:52px;bottom:-30px;
+  font-family:'Cormorant Garamond',serif;font-size:8rem;font-weight:700;
+  color:rgba(201,168,76,0.03);letter-spacing:0.05em;white-space:nowrap;
+}
+.svc-wide-text .svc-name{font-size:1.8rem;margin-bottom:10px}
+.svc-wide-text .svc-desc{max-width:580px;margin-bottom:0}
+
+/* ── ABOUT ── */
+#about{padding:120px 0;background:var(--ink2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-left .s-body{margin-bottom:2.5rem}
+.about-card{
+  background:var(--glass);
+  border:1px solid var(--border2);
+  padding:40px;position:relative;overflow:hidden;
+  backdrop-filter:blur(12px);
+}
+.about-card::before{
+  content:'';position:absolute;
+  top:-1px;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2),transparent);
+}
+.ac-avatar{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:2rem;
+  font-weight:700;color:var(--ink);margin-bottom:20px;
+  position:relative;
+}
+.ac-avatar::after{
+  content:'';position:absolute;inset:-4px;
+  border-radius:50%;border:1px solid rgba(201,168,76,0.3);
+  animation:spinRing 8s linear infinite;
+}
+@keyframes spinRing{from{transform:rotate(0deg) scale(1)}50%{transform:rotate(180deg) scale(1.05)}to{transform:rotate(360deg) scale(1)}}
+.ac-name{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;color:#fff;margin-bottom:4px}
+.ac-role{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.ac-bio{font-size:14px;color:var(--muted);line-height:1.9;font-weight:300;margin-bottom:20px}
+.ac-tags{display:flex;flex-wrap:wrap;gap:8px}
+.ac-tag{
+  font-size:11px;padding:5px 14px;
+  background:rgba(201,168,76,0.07);
+  border:1px solid rgba(201,168,76,0.18);
+  color:var(--gold);font-weight:500;letter-spacing:0.05em;
+}
+.about-pillars{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:2.5rem}
+.ap{
+  background:var(--glass);border:1px solid var(--border2);
+  padding:24px;transition:border-color 0.3s,background 0.3s;
+}
+.ap:hover{border-color:var(--border);background:var(--glass2)}
+.ap-n{
+  font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:700;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;margin-bottom:4px;
+}
+.ap-l{font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.55)}
+.ap-s{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:6px}
+
+/* ── PROCESS ── */
+#process{padding:110px 0;background:var(--ink)}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:60px;position:relative}
+.process-grid::before{
+  content:'';position:absolute;top:44px;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),var(--border),transparent);
+  z-index:0;
+}
+.pstep{padding:0 24px;text-align:center;position:relative;z-index:1}
+.pstep-num{
+  width:88px;height:88px;margin:0 auto 28px;
+  background:var(--ink);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;
+  color:var(--gold);position:relative;transition:all 0.4s;
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+}
+.pstep:hover .pstep-num{background:rgba(201,168,76,0.1);border-color:var(--gold);box-shadow:0 0 30px var(--glow)}
+.pstep-title{font-size:1rem;font-weight:600;color:#fff;margin-bottom:10px;letter-spacing:0.03em}
+.pstep-desc{font-size:13px;color:var(--muted);line-height:1.75;font-weight:300}
+
+/* ── TESTIMONIALS ── */
+#testimonials{padding:110px 0;background:var(--ink2);overflow:hidden}
+.testi-track-wrap{
+  overflow:hidden;margin-top:60px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,black 10%,black 90%,transparent);
+}
+.testi-track{
+  display:flex;gap:24px;
+  animation:scrollTrack 30s linear infinite;
+  width:max-content;
+}
+.testi-track:hover{animation-play-state:paused}
+@keyframes scrollTrack{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tcard{
+  background:var(--glass);border:1px solid var(--border2);
+  padding:32px 28px;width:340px;flex-shrink:0;
+  position:relative;overflow:hidden;
+  backdrop-filter:blur(8px);transition:border-color 0.3s;
+}
+.tcard:hover{border-color:rgba(201,168,76,0.3)}
+.tcard::before{
+  content:'"';position:absolute;top:-10px;right:20px;
+  font-family:'Cormorant Garamond',serif;font-size:8rem;font-weight:700;
+  color:rgba(201,168,76,0.06);line-height:1;
+}
+.tcard-stars{display:flex;gap:4px;margin-bottom:16px}
+.tcard-star{width:14px;height:14px;color:var(--gold)}
+.tcard-text{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.85;font-weight:300;margin-bottom:20px}
+.tcard-author{display:flex;align-items:center;gap:12px;border-top:1px solid var(--border2);padding-top:16px}
+.tcard-av{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:700;color:var(--ink);flex-shrink:0;
+}
+.tcard-name{font-size:14px;font-weight:600;color:#fff}
+.tcard-role{font-size:11.5px;color:var(--muted)}
+
+/* ── CONTACT ── */
+#contact{padding:120px 0;background:var(--ink);position:relative;overflow:hidden}
+#contact::before{
+  content:'';position:absolute;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,0.05),transparent 70%);
+  right:-200px;top:-200px;pointer-events:none;
+}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start}
+.cinfo-item{
+  display:flex;align-items:flex-start;gap:18px;
+  padding:22px 0;border-bottom:1px solid var(--border2);
+  transition:padding-left 0.3s;
+}
+.cinfo-item:hover{padding-left:6px}
+.cinfo-icon{
+  width:46px;height:46px;flex-shrink:0;
+  background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.15);
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.3s;
+}
+.cinfo-item:hover .cinfo-icon{background:rgba(201,168,76,0.15);border-color:var(--gold)}
+.cinfo-icon svg{width:20px;height:20px;stroke:var(--gold);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.cinfo-lbl{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+.cinfo-val{font-size:15px;color:#fff;font-weight:500;text-decoration:none;transition:color 0.2s}
+.cinfo-val:hover{color:var(--gold)}
+/* Form */
+.cf{
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border2);padding:44px;
+  position:relative;overflow:hidden;
+  backdrop-filter:blur(12px);
+}
+.cf::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2),transparent);
+}
+.cf-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:#fff;margin-bottom:8px}
+.cf-sub{font-size:13.5px;color:var(--muted);margin-bottom:32px;font-weight:300}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.f-group{display:flex;flex-direction:column;gap:0;position:relative;margin-bottom:16px}
+.f-group label{
+  font-size:10.5px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:8px;transition:color 0.2s;
+}
+.f-group:focus-within label{color:var(--gold)}
+.f-group input,.f-group select,.f-group textarea{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);
+  color:#fff;font-family:'Outfit',sans-serif;font-size:14.5px;font-weight:300;
+  padding:14px 18px;outline:none;width:100%;
+  transition:border-color 0.25s,background 0.25s;
+  border-radius:0;-webkit-appearance:none;
+}
+.f-group input:focus,.f-group select:focus,.f-group textarea:focus{
+  border-color:var(--gold);background:rgba(201,168,76,0.04);
+}
+.f-group input::placeholder,.f-group textarea::placeholder{color:rgba(255,255,255,0.2)}
+.f-group select{cursor:none;color:rgba(255,255,255,0.6)}
+.f-group select option{background:var(--ink2)}
+.f-group textarea{resize:vertical;min-height:110px}
+.f-submit{
+  width:100%;padding:16px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border:none;color:var(--ink);
+  font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:0.15em;text-transform:uppercase;
+  cursor:none;position:relative;overflow:hidden;transition:all 0.3s;
+}
+.f-submit:hover{transform:translateY(-2px);box-shadow:0 12px 35px rgba(201,168,76,0.3)}
+.f-note{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:11.5px;color:var(--dim)}
+.f-note svg{width:14px;height:14px;stroke:var(--dim);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+/* Social bar */
+.social-bar{display:flex;gap:14px;margin-top:2.5rem}
+.s-btn{
+  display:flex;align-items:center;gap:10px;
+  border:1px solid var(--border2);padding:12px 20px;
+  text-decoration:none;color:var(--muted);font-size:13px;font-weight:500;
+  transition:all 0.3s;
+}
+.s-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.06)}
+.s-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── FOOTER ── */
+footer{
+  background:#030608;padding:60px 0 28px;
+  border-top:1px solid var(--border);
+}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;
+  gap:48px;margin-bottom:44px;
+}
+.foot-logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#fff;margin-bottom:14px;display:block}
+.foot-logo span{color:var(--gold)}
+.foot-desc{font-size:13.5px;color:var(--muted);line-height:1.85;max-width:260px;font-weight:300;margin-bottom:24px}
+.foot-socials{display:flex;gap:10px}
+.fsoc{
+  width:36px;height:36px;border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);text-decoration:none;font-size:12px;font-weight:600;
+  transition:all 0.25s;
+}
+.fsoc:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.07)}
+.foot-h{font-size:10.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.foot-ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.foot-ul a{
+  font-size:13.5px;color:var(--muted);text-decoration:none;
+  display:flex;align-items:center;gap:8px;transition:color 0.2s;font-weight:300;
+}
+.foot-ul a:hover{color:#fff}
+.foot-ul a::before{content:'–';color:var(--gold);opacity:0;transition:opacity 0.2s}
+.foot-ul a:hover::before{opacity:1}
+.foot-ci{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--muted);margin-bottom:14px;font-weight:300}
+.foot-ci a{color:var(--muted);text-decoration:none;transition:color 0.2s}
+.foot-ci a:hover{color:var(--gold)}
+.foot-ci svg{width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:1px}
+.footer-bar{
+  border-top:1px solid rgba(255,255,255,0.05);
+  padding-top:24px;display:flex;
+  justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+}
+.footer-bar p,.footer-bar a{font-size:12px;color:var(--dim);text-decoration:none;transition:color 0.2s}
+.footer-bar a:hover{color:var(--gold)}
+.fbar-links{display:flex;gap:20px}
+
+/* ── WA FLOAT ── */
+.wa{
+  position:fixed;bottom:28px;right:28px;z-index:800;
+  width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 30px rgba(37,211,102,0.4);
+  text-decoration:none;transition:transform 0.3s,box-shadow 0.3s;
+  animation:fadeUp 1s ease 1.5s both;
+}
+.wa:hover{transform:scale(1.1) rotate(-8deg);box-shadow:0 14px 40px rgba(37,211,102,0.5)}
+.wa svg{width:30px;height:30px;fill:#fff}
+
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(36px);transition:opacity 0.75s ease,transform 0.75s ease}
+.rv.in{opacity:1;transform:translateY(0)}
+.rv1{transition-delay:0.1s}.rv2{transition-delay:0.2s}.rv3{transition-delay:0.3s}.rv4{transition-delay:0.4s}
+
+/* ── DIAGONAL ── */
+.diagonal-top{
+  position:absolute;top:0;left:0;right:0;height:80px;
+  background:inherit;clip-path:polygon(0 0,100% 0,100% 0,0 100%);
+  z-index:2;pointer-events:none;
+}
+.diagonal-top-inv{
+  position:absolute;top:0;left:0;right:0;height:80px;
+  background:inherit;clip-path:polygon(0 0,100% 100%,100% 0);
+  z-index:2;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .svc-wide{grid-column:span 2}
+  .process-grid{grid-template-columns:repeat(2,1fr);gap:40px}
+  .process-grid::before{display:none}
+  .about-grid{gap:48px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:36px}
+}
+@media(max-width:768px){
+  .nav-links,.nav-btn{display:none}
+  .hamburger{display:flex}
+  .hero-stats-bar{grid-template-columns:1fr 1fr}
+  .hstat:last-child{display:none}
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:1fr}
+  .svc-wide{grid-column:span 1}
+  .process-grid{grid-template-columns:1fr 1fr}
+  .f-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .social-bar{flex-wrap:wrap}
+  nav{padding:0 1.5rem}
+  .section-wrap{padding:0 5vw}
+}
+@media(max-width:480px){
+  .hero-actions{flex-direction:column}
+  .btn-gold,.btn-outline{justify-content:center;text-align:center}
+  .hero-stats-bar{grid-template-columns:1fr}
+  .hstat{border-right:none;border-bottom:1px solid var(--border2);padding:0 0 1.5rem;margin-bottom:1.5rem}
+  .process-grid{grid-template-columns:1fr}
+  #cursor,#cursor-ring{display:none}
+  body{cursor:auto}
+}
+
+/* SUCCESS state */
+.f-submit.success{background:linear-gradient(135deg,#1d9b5c,#27ae73);pointer-events:none}
+</style>
+</head>
+<body>
+
+<!-- PROGRESS -->
+<div id="progress"></div>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="logo-wrap">
+    <div class="logo-icon">C</div>
+    <div>
+      <div class="logo-text">CMC<span>Group</span></div>
+      <span class="logo-sub">Taxes & Accounting</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="https://wa.link/k6qm5j" target="_blank" class="nav-btn">Free Consultation</a>
+  <button class="hamburger" id="ham" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob" id="mob">
+  <button class="mob-close" id="mob-close">×</button>
+  <a href="#about" class="mob-lnk">About</a>
+  <a href="#services" class="mob-lnk">Services</a>
+  <a href="#process" class="mob-lnk">Process</a>
+  <a href="#contact" class="mob-lnk">Contact</a>
+  <a href="https://wa.link/k6qm5j" target="_blank" class="btn-gold" style="font-size:13px">Free Consultation</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-gradient"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <div class="hero-dot"></div>
+      <span>#1 Accounting Firm in Delaware</span>
+    </div>
+    <h1 class="hero-headline">
+      <span class="line">Tax &amp; Accounting</span>
+      <span class="line"><em>Expertise</em> You Can</span>
+      <span class="line">Trust.</span>
+    </h1>
+    <p class="hero-sub">
+      CMC Group is committed to the <strong>financial growth</strong> of individuals and small businesses across Delaware and the entire United States. Personalized, expert guidance — in your language.
+    </p>
+    <div class="hero-actions">
+      <a href="https://wa.link/k6qm5j" target="_blank" class="btn-gold">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        Get Free Consultation
+      </a>
+      <a href="#services" class="btn-outline">Explore Services →</a>
+    </div>
+    <div class="hero-stats-bar">
+      <div class="hstat">
+        <div class="hstat-n" data-count="15" data-suffix="+">0+</div>
+        <div class="hstat-l">Years of Experience</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n" data-count="750" data-suffix="+">0+</div>
+        <div class="hstat-l">Satisfied Clients</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n" data-count="50" data-suffix="+">0+</div>
+        <div class="hstat-l">Business Clients</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-wrap">
+    <div class="services-header rv">
+      <div class="s-label">What We Offer</div>
+      <h2 class="s-title">Our <em>Services</em></h2>
+      <p class="s-body">From business formation to international tax strategy — end-to-end financial expertise that protects and grows what you've built.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="svc rv">
+        <div class="svc-shine"></div>
+        <div class="svc-border"></div>
+        <div class="svc-num">01</div>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        </div>
+        <div class="svc-name">Company Registration</div>
+        <p class="svc-desc">Navigate every business registration option in the U.S. with expert guidance from start to finish — ensuring you choose the right structure for optimal tax efficiency.</p>
+        <a href="https://wa.link/5vjver" target="_blank" class="svc-cta">Inquire Now <span class="svc-cta-arrow">→</span></a>
+      </div>
+
+      <div class="svc rv rv1">
+        <div class="svc-shine"></div>
+        <div class="svc-border"></div>
+        <div class="svc-num">02</div>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <div class="svc-name">Business Accounting</div>
+        <p class="svc-desc">Our five-star flagship service — trusted by 50+ companies. Professional full-service accounting at a reasonable price, so you can focus entirely on your growth goals.</p>
+        <a href="https://wa.link/5vjver" target="_blank" class="svc-cta">Inquire Now <span class="svc-cta-arrow">→</span></a>
+      </div>
+
+      <div class="svc rv rv2">
+        <div class="svc-shine"></div>
+        <div class="svc-border"></div>
+        <div class="svc-num">03</div>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div class="svc-name">Tax Preparation & Planning</div>
+        <p class="svc-desc">Tax laws change every year. One misstep can trigger IRS penalties. We optimize your tax savings and shield your business — so you can sleep soundly every April.</p>
+        <a href="https://wa.link/5vjver" target="_blank" class="svc-cta">Inquire Now <span class="svc-cta-arrow">→</span></a>
+      </div>
+
+      <div class="svc rv">
+        <div class="svc-shine"></div>
+        <div class="svc-border"></div>
+        <div class="svc-num">04</div>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="svc-name">Payroll Management</div>
+        <p class="svc-desc">Running payroll manually is a risk you can't afford. Hundreds of businesses trust us to manage employee payments and stay compliant with all labor and tax regulations.</p>
+        <a href="https://wa.link/5vjver" target="_blank" class="svc-cta">Inquire Now <span class="svc-cta-arrow">→</span></a>
+      </div>
+
+      <div class="svc rv rv1">
+        <div class="svc-shine"></div>
+        <div class="svc-border"></div>
+        <div class="svc-num">05</div>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="svc-name">Business Consulting</div>
+        <p class="svc-desc">Starting, expanding, or restructuring? We provide expert guidance through every major business decision — from risk evaluation to sales and strategic growth planning.</p>
+        <a href="https://wa.link/5vjver" target="_blank" class="svc-cta">Inquire Now <span class="svc-cta-arrow">→</span></a>
+      </div>
+
+      <div class="svc rv rv2">
+        <div class="svc-shine"></div>
+        <div class="svc-border"></div>
+        <div class="svc-num">06</div>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <div class="svc-name">ITIN Number</div>
+        <p class="svc-desc">Full-service ITIN assistance — from initial application to final approval. Every step handled with precision and care, so you're never left guessing where you stand.</p>
+        <a href="https://wa.link/5vjver" target="_blank" class="svc-cta">Inquire Now <span class="svc-cta-arrow">→</span></a>
+      </div>
+
+      <div class="svc-wide rv">
+        <div class="svc-wide-text">
+          <div class="s-label" style="margin-bottom:10px">Specialty Service</div>
+          <div class="svc-name">International Tax Services</div>
+          <p class="svc-desc">Led by Certified International Tax Consultant Elder Ayala, we serve clients from Europe, Asia, and the Americas — U.S. citizens, residents, and foreign nationals — navigating complex cross-border tax regulations to maximize your savings.</p>
+        </div>
+        <a href="https://wa.link/5vjver" target="_blank" class="btn-gold" style="white-space:nowrap;flex-shrink:0">
+          Learn More →
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="padding:120px 0;background:var(--ink2)">
+  <div class="section-wrap">
+    <div class="about-grid">
+      <div class="rv">
+        <div class="s-label">Our Story</div>
+        <h2 class="s-title">Committed to Your <em>Growth</em></h2>
+        <p class="s-body" style="margin-bottom:1.2rem">CMC Group is a business group dedicated to the tax welfare of individuals and small businesses throughout Delaware and all across the United States.</p>
+        <p class="s-body" style="margin-bottom:2.5rem">We are proudly bilingual, serving clients of all backgrounds — from local Delaware entrepreneurs to international business owners entering the U.S. market. In our company, you'll always receive personalized guidance from a certified expert who understands your specific situation.</p>
+        <a href="#contact" class="btn-gold">Start Working With Us →</a>
+        <div class="about-pillars">
+          <div class="ap">
+            <div class="ap-n" data-count="15" data-suffix="+">0+</div>
+            <div class="ap-l">Years Experience</div>
+            <div class="ap-s">Helping companies reach their financial goals</div>
+          </div>
+          <div class="ap">
+            <div class="ap-n" data-count="750" data-suffix="+">0+</div>
+            <div class="ap-l">Clients Served</div>
+            <div class="ap-s">Best personalized advice by certified experts</div>
+          </div>
+          <div class="ap">
+            <div class="ap-n">5★</div>
+            <div class="ap-l">Google Rated</div>
+            <div class="ap-s">Outstanding reviews for expertise & service</div>
+          </div>
+          <div class="ap">
+            <div class="ap-n">100%</div>
+            <div class="ap-l">Confidential</div>
+            <div class="ap-s">All data handled with strict privacy</div>
+          </div>
+        </div>
+      </div>
+      <div class="rv rv2">
+        <div class="about-card">
+          <div class="ac-avatar">EA</div>
+          <div class="ac-name">Elder Ayala</div>
+          <div class="ac-role">CEO · Certified International Tax Consultant</div>
+          <p class="ac-bio">With a background in business administration, computer science, and accounting, Elder is a former software engineer for major financial and banking institutions across the USA.</p>
+          <p class="ac-bio" style="margin-bottom:0">As founder of the Hispanic American Association of Delaware, Inc., he works closely with state leaders to foster community development — bringing the same dedication to every client he serves.</p>
+          <div class="ac-tags" style="margin-top:20px">
+            <span class="ac-tag">Business Administration</span>
+            <span class="ac-tag">Computer Science</span>
+            <span class="ac-tag">Intl. Tax Consultant</span>
+            <span class="ac-tag">Former Software Engineer</span>
+            <span class="ac-tag">Community Leader · Delaware</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-wrap">
+    <div class="rv" style="text-align:center;max-width:600px;margin:0 auto">
+      <div class="s-label" style="justify-content:center"><span style="margin-left:28px">How It Works</span></div>
+      <h2 class="s-title">Your <em>Journey</em> With Us</h2>
+      <p class="s-body" style="margin:0 auto;text-align:center">Four simple steps from first contact to financial clarity.</p>
+    </div>
+    <div class="process-grid">
+      <div class="pstep rv">
+        <div class="pstep-num">01</div>
+        <div class="pstep-title">Free Consultation</div>
+        <p class="pstep-desc">Reach out via WhatsApp, phone, or email. Tell us about your situation — no fees, no commitment.</p>
+      </div>
+      <div class="pstep rv rv1">
+        <div class="pstep-num">02</div>
+        <div class="pstep-title">Custom Strategy</div>
+        <p class="pstep-desc">Our expert analyzes your needs and builds a tailored tax or accounting plan aligned with your goals.</p>
+      </div>
+      <div class="pstep rv rv2">
+        <div class="pstep-num">03</div>
+        <div class="pstep-title">Expert Execution</div>
+        <p class="pstep-desc">We handle all filings, registrations, and accounting with precision, keeping you informed at every step.</p>
+      </div>
+      <div class="pstep rv rv3">
+        <div class="pstep-num">04</div>
+        <div class="pstep-title">Ongoing Support</div>
+        <p class="pstep-desc">Tax laws evolve. We stay ahead of changes so you never face surprises from the IRS or state authorities.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-wrap">
+    <div class="rv" style="text-align:center;max-width:600px;margin:0 auto">
+      <div class="s-label" style="justify-content:center"><span style="margin-left:28px">Client Reviews</span></div>
+      <h2 class="s-title">Trusted by <em>Hundreds</em></h2>
+      <p class="s-body" style="margin:0 auto;text-align:center">We're proud to have outstanding Google reviews from clients who trust us with their most important financial decisions.</p>
+    </div>
+  </div>
+  <div class="testi-track-wrap">
+    <div class="testi-track" id="ttrack"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="contact-grid">
+      <div class="rv">
+        <div class="s-label">Get In Touch</div>
+        <h2 class="s-title">Let's Talk About Your <em>Finances</em></h2>
+        <p class="s-body" style="margin-bottom:3rem">Ready to take control of your taxes and grow your business? Our certified experts are standing by — reach us through any channel below.</p>
+
+        <div class="cinfo-item">
+          <div class="cinfo-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></div>
+          <div><div class="cinfo-lbl">Email</div><a href="mailto:info@cmcgrouptaxes.com" class="cinfo-val">info@cmcgrouptaxes.com</a></div>
+        </div>
+        <div class="cinfo-item">
+          <div class="cinfo-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.74 19 19.5 19.5 0 0 1 5 12.26 19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72 14.78 14.78 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 14.78 14.78 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><div class="cinfo-lbl">Phone</div><a href="tel:+18665048090" class="cinfo-val">(+1) 866-504-8090</a></div>
+        </div>
+        <div class="cinfo-item">
+          <div class="cinfo-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><div class="cinfo-lbl">Office</div><span class="cinfo-val">92 S Gerald Dr. Suite A, Newark, DE 19713</span></div>
+        </div>
+        <div class="cinfo-item" style="border-bottom:none">
+          <div class="cinfo-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div>
+          <div><div class="cinfo-lbl">Hours</div><span class="cinfo-val">Mon–Fri: 9:00 AM – 6:00 PM</span></div>
+        </div>
+
+        <div class="social-bar" style="margin-top:2.5rem">
+          <a href="https://www.facebook.com/cmcgrouptaxes" target="_blank" class="s-btn">
+            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            Facebook
+          </a>
+          <a href="https://www.instagram.com/cmcgrouptaxes/" target="_blank" class="s-btn">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            Instagram
+          </a>
+          <a href="https://wa.link/hziu8h" target="_blank" class="s-btn">
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="rv rv2">
+        <div class="cf">
+          <div class="cf-title">Send a Message</div>
+          <p class="cf-sub">Fill in the form and we'll get back to you within 24 hours.</p>
+          <form id="cf" onsubmit="submitForm(event)">
+            <div class="f-row">
+              <div class="f-group"><label>First Name</label><input type="text" placeholder="John" required></div>
+              <div class="f-group"><label>Last Name</label><input type="text" placeholder="Doe" required></div>
+            </div>
+            <div class="f-group"><label>Email Address</label><input type="email" placeholder="john@email.com" required></div>
+            <div class="f-group"><label>Phone Number</label><input type="tel" placeholder="+1 (___) ___-____"></div>
+            <div class="f-group">
+              <label>Service of Interest</label>
+              <select>
+                <option value="" disabled selected>Select a service…</option>
+                <option>Company Registration</option>
+                <option>Business Accounting</option>
+                <option>Tax Preparation &amp; Planning</option>
+                <option>Payroll Management</option>
+                <option>Business Consulting</option>
+                <option>ITIN Number</option>
+                <option>International Tax Services</option>
+              </select>
+            </div>
+            <div class="f-group"><label>Message</label><textarea placeholder="Tell us about your situation…"></textarea></div>
+            <button type="submit" class="f-submit" id="fsub">Send Message →</button>
+            <p class="f-note">
+              <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Your information is strictly confidential and never shared.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="section-wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="#hero" class="foot-logo">CMC<span>Group</span> Taxes</a>
+        <p class="foot-desc">Delaware's #1 accounting firm. Committed to the financial growth and tax welfare of individuals and businesses across the USA.</p>
+        <div class="foot-socials">
+          <a href="https://www.facebook.com/cmcgrouptaxes" target="_blank" class="fsoc">f</a>
+          <a href="https://www.instagram.com/cmcgrouptaxes/" target="_blank" class="fsoc">ig</a>
+          <a href="https://wa.link/hziu8h" target="_blank" class="fsoc">wa</a>
+        </div>
+      </div>
+      <div>
+        <div class="foot-h">Services</div>
+        <ul class="foot-ul">
+          <li><a href="https://wa.link/5vjver" target="_blank">Company Registration</a></li>
+          <li><a href="https://wa.link/5vjver" target="_blank">Business Accounting</a></li>
+          <li><a href="https://wa.link/5vjver" target="_blank">Tax Preparation</a></li>
+          <li><a href="https://wa.link/5vjver" target="_blank">Payroll Management</a></li>
+          <li><a href="https://wa.link/5vjver" target="_blank">Business Consulting</a></li>
+          <li><a href="https://wa.link/5vjver" target="_blank">ITIN Number</a></li>
+          <li><a href="https://wa.link/5vjver" target="_blank">International Taxes</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-h">Company</div>
+        <ul class="foot-ul">
+          <li><a href="#about">About CMC Group</a></li>
+          <li><a href="#services">Our Services</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="https://cmcgrouptaxes.com/tu-empresa-en-usa/" target="_blank">Tu Empresa en USA</a></li>
+          <li><a href="https://cmcgrouptaxes.com/privacy/" target="_blank">Privacy Policy</a></li>
+          <li><a href="https://cmcgrouptaxes.com/terms/" target="_blank">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-h">Contact Info</div>
+        <div class="foot-ci"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>92 S Gerald Dr. Suite A<br>Newark, DE 19713</span></div>
+        <div class="foot-ci"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg><a href="mailto:info@cmcgrouptaxes.com">info@cmcgrouptaxes.com</a></div>
+        <div class="foot-ci"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.74 19 19.5 19.5 0 0 1 5 12.26 19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72 14.78 14.78 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 14.78 14.78 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="tel:+18665048090">(+1) 866-504-8090</a></div>
+        <div class="foot-ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg><span>Mon–Fri: 9:00 AM – 6:00 PM</span></div>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <p>© 2025 CMC Group Taxes. All Rights Reserved. Newark, Delaware, USA.</p>
+      <div class="fbar-links">
+        <a href="https://cmcgrouptaxes.com/privacy/" target="_blank">Privacy</a>
+        <a href="https://cmcgrouptaxes.com/terms/" target="_blank">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WA -->
+<a href="https://wa.link/hziu8h" target="_blank" class="wa" title="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+// ── CURSOR ──
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+});
+function animRing(){
+  rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}animRing();
+
+// ── PROGRESS BAR ──
+const prog=document.getElementById('progress');
+window.addEventListener('scroll',()=>{
+  const h=document.body.scrollHeight-window.innerHeight;
+  prog.style.width=(window.scrollY/h*100)+'%';
+});
+
+// ── NAV SCROLL ──
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>60);
+});
+
+// ── MOBILE MENU ──
+document.getElementById('ham').addEventListener('click',()=>{
+  document.getElementById('mob').classList.add('open');
+  document.body.style.overflow='hidden';
+});
+document.getElementById('mob-close').addEventListener('click',close_mob);
+document.querySelectorAll('.mob-lnk').forEach(a=>a.addEventListener('click',close_mob));
+function close_mob(){document.getElementById('mob').classList.remove('open');document.body.style.overflow='';}
+
+// ── PARTICLES CANVAS ──
+const canvas=document.getElementById('hero-canvas');
+const ctx=canvas.getContext('2d');
+let W,H,particles=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+resize();window.addEventListener('resize',resize);
+function mkParticle(){
+  return{
+    x:Math.random()*W,y:Math.random()*H,
+    r:Math.random()*1.5+0.3,
+    vx:(Math.random()-0.5)*0.25,vy:(Math.random()-0.5)*0.25,
+    a:Math.random()*0.5+0.1,
+    gold:Math.random()>0.85
+  };
+}
+for(let i=0;i<120;i++)particles.push(mkParticle());
+function drawParticles(){
+  ctx.clearRect(0,0,W,H);
+  particles.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0)p.x=W;if(p.x>W)p.x=0;
+    if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=p.gold?`rgba(201,168,76,${p.a})`:`rgba(255,255,255,${p.a*0.4})`;
+    ctx.fill();
+  });
+  // connect nearby
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<120){
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x,particles[i].y);
+        ctx.lineTo(particles[j].x,particles[j].y);
+        ctx.strokeStyle=`rgba(201,168,76,${0.06*(1-d/120)})`;
+        ctx.lineWidth=0.5;ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(drawParticles);
+}drawParticles();
+
+// ── COUNTER ANIMATION ──
+function animCount(el){
+  const target=parseInt(el.getAttribute('data-count'));
+  const suf=el.getAttribute('data-suffix')||'';
+  const dur=1600;const start=performance.now();
+  function upd(now){
+    const t=Math.min((now-start)/dur,1);
+    const e=1-Math.pow(1-t,4);
+    el.textContent=Math.round(e*target)+suf;
+    if(t<1)requestAnimationFrame(upd);
+  }requestAnimationFrame(upd);
+}
+
+// ── SCROLL REVEAL + COUNTERS ──
+const rvEls=document.querySelectorAll('.rv');
+const counters=document.querySelectorAll('[data-count]');
+const triggered=new Set();
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}
+  });
+},{threshold:0.12});
+rvEls.forEach(e=>obs.observe(e));
+const cobs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting&&!triggered.has(e.target)){
+      triggered.add(e.target);
+      animCount(e.target);
+      cobs.unobserve(e.target);
+    }
+  });
+},{threshold:0.5});
+counters.forEach(e=>cobs.observe(e));
+
+// ── TESTIMONIALS ──
+const reviews=[
+  {text:"CMC Group saved my business thousands in taxes. Elder's expertise is unmatched — I've been a client for 6 years and wouldn't go anywhere else.",name:"Maria G.",role:"Small Business Owner",init:"MG",stars:5},
+  {text:"Finally found an accountant who speaks Spanish and truly understands the complexity of running a business as an immigrant. Absolutely recommend!",name:"Carlos R.",role:"Restaurant Owner",init:"CR",stars:5},
+  {text:"They handled my company registration and set up my accounting from scratch. Professional, fast, and incredibly knowledgeable.",name:"David K.",role:"LLC Founder",init:"DK",stars:5},
+  {text:"Tax season used to be a nightmare. With CMC Group, everything is handled perfectly and on time. No more stress with the IRS.",name:"Jennifer L.",role:"Freelancer",init:"JL",stars:5},
+  {text:"Elder helped me get my ITIN and file my first U.S. taxes as a foreign national. The process was seamless. Truly exceptional service.",name:"Paulo S.",role:"International Entrepreneur",init:"PS",stars:5},
+  {text:"Best accounting firm in Delaware, hands down. They go above and beyond for every single client. Highly recommend to any business owner.",name:"Sandra M.",role:"E-commerce CEO",init:"SM",stars:5},
+];
+const track=document.getElementById('ttrack');
+const double=[...reviews,...reviews];
+double.forEach(r=>{
+  const stars='★'.repeat(r.stars);
+  track.innerHTML+=`<div class="tcard">
+    <div class="tcard-stars">${[...Array(r.stars)].map(()=>`<svg class="tcard-star" viewBox="0 0 24 24" fill="var(--gold)" stroke="var(--gold)" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>`).join('')}</div>
+    <p class="tcard-text">"${r.text}"</p>
+    <div class="tcard-author">
+      <div class="tcard-av">${r.init}</div>
+      <div><div class="tcard-name">${r.name}</div><div class="tcard-role">${r.role}</div></div>
+    </div>
+  </div>`;
+});
+
+// ── FORM ──
+function submitForm(e){
+  e.preventDefault();
+  const btn=document.getElementById('fsub');
+  btn.textContent='✓ Message Sent! We\'ll be in touch soon.';
+  btn.classList.add('success');
+  setTimeout(()=>{
+    btn.textContent='Send Message →';
+    btn.classList.remove('success');
+    e.target.reset();
+  },5000);
+}
+
+// ── MAGNETIC BUTTONS ──
+document.querySelectorAll('.btn-gold,.nav-btn,.btn-outline').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*0.2;
+    const y=(e.clientY-r.top-r.height/2)*0.2;
+    btn.style.transform=`translate(${x}px,${y}px)`;
+  });
+  btn.addEventListener('mouseleave',()=>{
+    btn.style.transform='translate(0,0)';
+  });
+});
+
+// ── PARALLAX HERO ──
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY;
+  const heroInner=document.querySelector('.hero-inner');
+  if(heroInner&&s<window.innerHeight){
+    heroInner.style.transform=`translateY(${s*0.25}px)`;
+    heroInner.style.opacity=1-s/(window.innerHeight*0.7);
+  }
+});
+</script>
+</body>
+</html>
